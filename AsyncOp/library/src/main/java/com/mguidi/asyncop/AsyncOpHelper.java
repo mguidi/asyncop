@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * @author mguidi
+ * Created by marco on 22/07/14.
  */
 public class AsyncOpHelper {
 
@@ -47,6 +47,13 @@ public class AsyncOpHelper {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             Integer idRequest = intent.getIntExtra(Constants.ARGS_ID_REQUEST, -1);
+
+            Intent doneIntent = new Intent(Constants.ACTION_ASYNCOP_FINISH);
+            doneIntent.putExtra(Constants.ARGS_ID_HELPER, mIdHelper);
+            doneIntent.putExtra(Constants.ARGS_ID_REQUEST, idRequest);
+
+            LocalBroadcastManager.getInstance(mContext).sendBroadcast(doneIntent);
+
             if (mPendingRequests.contains(idRequest)) {
                 String action = mMapPendingRequestsAction.getString(String.valueOf(idRequest));
 
@@ -71,12 +78,6 @@ public class AsyncOpHelper {
 
                     mAsyncOpCallback.onAsyncOpFinish(idRequest, action, args, result);
                 }
-
-                Intent doneIntent = new Intent(Constants.ACTION_ASYNCOP_FINISH);
-                doneIntent.putExtra(Constants.ARGS_ID_HELPER, mIdHelper);
-                doneIntent.putExtra(Constants.ARGS_ID_REQUEST, idRequest);
-
-                LocalBroadcastManager.getInstance(mContext).sendBroadcast(doneIntent);
 
             } else {
                 if (Log.isLoggable(Constants.LOG_TAG, Log.WARN)) {
@@ -143,9 +144,10 @@ public class AsyncOpHelper {
         intent.putExtra(Constants.ARGS_ARGS, args);
 
         if (!LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent)) {
-            if (Log.isLoggable(Constants.LOG_TAG, Log.WARN)) {
-                Log.w(Constants.LOG_TAG, "asyncop manager not initialize");
+            if (Log.isLoggable(Constants.LOG_TAG, Log.ERROR)) {
+                Log.e(Constants.LOG_TAG, "asyncop manager not initialize");
             }
+            throw new RuntimeException("asyncop manager not initialize");
         }
 
         return idRequest;
