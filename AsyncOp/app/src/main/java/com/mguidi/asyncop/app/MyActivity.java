@@ -25,6 +25,9 @@ import android.view.View;
 import com.mguidi.asyncop.AsyncOpCallback;
 import com.mguidi.asyncop.AsyncOpHelper;
 
+/**
+ * Created by marco on 21/07/14.
+ */
 public class MyActivity extends ActionBarActivity implements AsyncOpCallback, View.OnClickListener {
 
 

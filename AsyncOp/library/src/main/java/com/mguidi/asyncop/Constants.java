@@ -17,7 +17,7 @@
 package com.mguidi.asyncop;
 
 /**
- * @author mguidi
+ * Created by marco on 22/07/14.
  */
 class Constants {
 

@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-
-
-
-
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.0"
 
     defaultConfig {
         applicationId "com.mguidi.asyncop"
         minSdkVersion 8
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -39,7 +35,30 @@ android {
     }
 }
 
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:20.+'
+    compile 'com.android.support:support-v4:21.0.+'
+}
+
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().url)
+
+            pom.groupId = 'com.mguidi.asyncop'
+            pom.artifactId = 'asyncop'
+            pom.version = '1.0.0'
+        }
+    }
 }

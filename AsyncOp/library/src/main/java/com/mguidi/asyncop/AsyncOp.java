@@ -23,7 +23,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 /**
- * @author mguidi
+ * Created by marco on 22/07/14.
  */
 public abstract class AsyncOp implements Runnable {
 
