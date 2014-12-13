@@ -32,10 +32,10 @@ import java.util.UUID;
  */
 public class AsyncOpHelper {
 
-    public static final String SAVED_ID_HELPER = "com.github.mguidi.asyncop.asyncop:id_helper";
-    public static final String SAVED_ID_REQUEST = "com.github.mguidi.asyncop.asyncop:id_request";
-    public static final String SAVED_PENDING_REQUESTS = "com.github.mguidi.asyncop.asyncop:pending_requests";
-    public static final String SAVED_MAP_PENDING_REQUESTS_ACTION = "com.github.mguidi.asyncop.asyncop:map_pending_requests_action";
+    public static final String SAVED_ID_HELPER = "com.github.mguidi.asyncop:id_helper";
+    public static final String SAVED_ID_REQUEST = "com.github.mguidi.asyncop:id_request";
+    public static final String SAVED_PENDING_REQUESTS = "com.github.mguidi.asyncop:pending_requests";
+    public static final String SAVED_MAP_PENDING_REQUESTS_ACTION = "com.github.mguidi.asyncop:map_pending_requests_action";
 
     private Context mContext;
     private String mIdHelper;
