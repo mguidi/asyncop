@@ -7,12 +7,12 @@ A very helpful framework for asynchronous operation related to an Activity or Fr
 How to use
 ==========
 
-with Android Studio add dependency:
+With Android Studio add dependency:
 
 	compile 'com.github.mguidi.asyncop:asyncop:1.0.0'
 
 
-the define your async operation extending the AsyncOp Class:
+Define your async operation extending the AsyncOp Class:
 
 	public class LongOp extends AsyncOp {
 
@@ -28,7 +28,7 @@ the define your async operation extending the AsyncOp Class:
 
 	}
 	
-map your operation with an action in your Application class:
+Map your operation with an action in your Application class:
 
 	public class Application extends android.app.Application {
 
@@ -40,7 +40,7 @@ map your operation with an action in your Application class:
     	}
 	}
 	
-and then execute the operation inside an Activity or a Fragment
+Execute the operation inside an Activity or a Fragment
 
 	public class MyActivity extends ActionBarActivity implements AsyncOpCallback, View.OnClickListener {
 
