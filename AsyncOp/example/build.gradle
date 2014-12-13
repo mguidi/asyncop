@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+
+
+
+
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
+        applicationId "com.github.mguidi.asyncop.app"
         minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
-        versionCode Integer.parseInt(project.VERSION_CODE)
-        versionName project.VERSION_NAME
+        versionCode 1
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -34,33 +39,8 @@ android {
     }
 }
 
-//task androidSourcesJar(type: Jar) {
-//    classifier = 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
-//
-//artifacts {
-//    archives androidSourcesJar
-//}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:21.0.+'
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile project(':library')
 }
-
-
-//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
-
-//apply plugin: 'maven'
-//
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: mavenLocal().url)
-//
-//            pom.groupId = 'com.github.mguidi.asyncop.asyncop'
-//            pom.artifactId = 'asyncop'
-//            pom.version = '1.0.0'
-//        }
-//    }
-//}

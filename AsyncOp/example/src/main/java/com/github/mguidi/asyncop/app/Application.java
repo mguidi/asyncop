@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 
+package com.github.mguidi.asyncop.app;
 
+import com.github.mguidi.asyncop.AsyncOpManager;
 
+/**
+ * Created by marco on 12/13/14.
+ */
+public class Application extends android.app.Application {
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
+        AsyncOpManager.getInstance(this).mapOp(Constants.ACTION_LONGOP, LongOp.class);
     }
 }
