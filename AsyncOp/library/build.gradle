@@ -34,33 +34,10 @@ android {
     }
 }
 
-//task androidSourcesJar(type: Jar) {
-//    classifier = 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
-//
-//artifacts {
-//    archives androidSourcesJar
-//}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:21.0.+'
 }
 
 
-//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
-
-//apply plugin: 'maven'
-//
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: mavenLocal().url)
-//
-//            pom.groupId = 'com.github.mguidi.asyncop.asyncop'
-//            pom.artifactId = 'asyncop'
-//            pom.version = '1.0.0'
-//        }
-//    }
-//}
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
