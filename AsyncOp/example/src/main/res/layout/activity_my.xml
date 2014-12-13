@@ -18,10 +18,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.github.mguidi.asyncop.app.MyActivity">
 
     <Button
@@ -32,9 +32,17 @@
 
     <TextView
         android:id="@+id/txtResult"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_below="@+id/btnHello"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnHello"
+        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

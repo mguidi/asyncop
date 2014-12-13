@@ -31,7 +31,10 @@ import com.github.mguidi.asyncop.AsyncOpHelper;
  */
 public class MyActivity extends ActionBarActivity implements AsyncOpCallback, View.OnClickListener {
 
+    private static final String SAVED_ID_REQUEST = "id_request";
+
     private AsyncOpHelper mOpHelper;
+    private int mIdRequest = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,14 @@ public class MyActivity extends ActionBarActivity implements AsyncOpCallback, Vi
         mOpHelper = new AsyncOpHelper(this, savedInstanceState, this);
 
         findViewById(R.id.btnHello).setOnClickListener(this);
+
+        if (savedInstanceState != null) {
+            mIdRequest = savedInstanceState.getInt(SAVED_ID_REQUEST);
+        }
+
+        if (mOpHelper.isLoading(mIdRequest)) {
+            findViewById(R.id.loading).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -53,6 +64,7 @@ public class MyActivity extends ActionBarActivity implements AsyncOpCallback, Vi
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mOpHelper.onSaveInstanceState(outState);
+        outState.putInt(SAVED_ID_REQUEST, mIdRequest);
     }
 
     @Override
@@ -61,10 +73,11 @@ public class MyActivity extends ActionBarActivity implements AsyncOpCallback, Vi
         mOpHelper.onPause();
     }
 
-
     @Override
     public void onAsyncOpFinish(int idRequest, String action, Bundle args, Bundle result) {
         if (action.equals(Constants.ACTION_LONGOP)) {
+            findViewById(R.id.loading).setVisibility(View.GONE);
+
             if (result.containsKey(LongOp.RES_RESULT)) {
                 TextView txtResult = (TextView) findViewById(R.id.txtResult);
                 txtResult.setText(result.getString(LongOp.RES_RESULT));
@@ -75,6 +88,8 @@ public class MyActivity extends ActionBarActivity implements AsyncOpCallback, Vi
     @Override
     public void onAsyncOpFail(int idRequest, String action) {
         if (action.equals(Constants.ACTION_LONGOP)) {
+            findViewById(R.id.loading).setVisibility(View.GONE);
+
             TextView txtResult = (TextView) findViewById(R.id.txtResult);
             txtResult.setText("fail");
         }
@@ -86,7 +101,8 @@ public class MyActivity extends ActionBarActivity implements AsyncOpCallback, Vi
             Bundle args = new Bundle();
             args.putLong(LongOp.ARGS_TIMEOUT, 2000L);
 
-            mOpHelper.execute(Constants.ACTION_LONGOP, args);
+            mIdRequest = mOpHelper.execute(Constants.ACTION_LONGOP, args);
+            findViewById(R.id.loading).setVisibility(View.VISIBLE);
         }
     }
 
